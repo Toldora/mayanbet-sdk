@@ -51,5 +51,6 @@ module.exports = {
         allow: ['warn', 'error'],
       },
     ],
+    'import/no-unresolved': [2, { ignore: ['\\.hbs'] }],
   },
 };

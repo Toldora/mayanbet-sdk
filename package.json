@@ -2,7 +2,7 @@
   "name": "mayanbet-sdk",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/src/index.js",
   "scripts": {
     "build": "yarn clean && npx swc src -d ./dist --config-file .swcrc -C module.type=es6 isModule=true",
     "clean": "rm -rf dist",

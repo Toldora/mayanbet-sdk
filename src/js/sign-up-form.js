@@ -1,16 +1,18 @@
-import handlebars from 'handlebars';
+// import handlebars from 'handlebars';
 import queryString from 'query-string';
-import template from '@/partials/sign-up-form.hbs?raw';
+// import template from '@/templates/sign-up-form.hbs?raw';
+import {
+  // openModal,
+  setToLS,
+  prepareInputMask,
+  generateId,
+  generatePassword,
+} from '@/js';
 import { registerUser, registerUserViaTelephone } from '@/api/registration';
-import { openModal } from '@/js/modal';
-import { setToLS } from '@/js/local-storage';
-import { prepareInputMask } from '@/js/prepare-input-mask';
-import { generateId } from '@/js/generate-id';
-import { generatePassword } from '@/js/generate-password';
 import { sendMessage, validatePhone } from '@/api/wavix';
 import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
 
-const modalContentRef = document.querySelector('.js-app-modal-content');
+// const modalContentRef = document.querySelector('.js-app-modal-content');
 
 export class SignUpForm {
   formRef = null;
@@ -249,15 +251,15 @@ export class SignUpForm {
   }
 }
 
-export const openSignUpModal = ({ isBlocked } = {}) => {
-  const markup = handlebars.compile(template)();
+// export const openSignUpModal = ({ isBlocked } = {}) => {
+//   const markup = handlebars.compile(template)();
 
-  modalContentRef.innerHTML = '';
-  modalContentRef.insertAdjacentHTML('beforeend', markup);
+//   modalContentRef.innerHTML = '';
+//   modalContentRef.insertAdjacentHTML('beforeend', markup);
 
-  new SignUpForm({
-    formRef: document.forms.signUp,
-  });
+//   new SignUpForm({
+//     formRef: document.forms.signUp,
+//   });
 
-  openModal({ isBlocked });
-};
+//   openModal({ isBlocked });
+// };
