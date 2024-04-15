@@ -7,7 +7,7 @@ import {
   prepareInputMask,
   generateId,
   generatePassword,
-} from '@/js';
+} from '@/utils';
 import { registerUser, registerUserViaTelephone } from '@/api/registration';
 import { sendMessage, validatePhone } from '@/api/wavix';
 import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
