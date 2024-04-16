@@ -4,7 +4,7 @@
   "description": "",
   "main": "./dist/src/index.js",
   "scripts": {
-    "build": "yarn clean && npx swc src -d ./dist --config-file .swcrc -C module.type=es6 isModule=true",
+    "build": "yarn clean && npx swc src -d ./dist --config-file .swcrc -C module.type=es6 isModule=true && cp -R static ./dist",
     "clean": "rm -rf dist",
     "lint": "yarn lint:scripts && yarn lint:styles",
     "lint:scripts": "eslint \"{src,config}/**/*.js\" --cache --fix --max-warnings=0",

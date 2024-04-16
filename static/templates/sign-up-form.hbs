@@ -1,6 +1,6 @@
 <form
-  class='sign-up-form__form sign-up-form__form--auth-with-tel {{#if class}}{{class}}{{/if}}'
-  name={{#if name}}'{{name}}'{{else}}'signUp'{{/if}}
+  class='sign-up-form__form sign-up-form__form--auth-with-tel {{#if formClass}}{{formClass}}{{/if}}'
+  name={{#if formName}}'{{formName}}'{{else}}'signUp'{{/if}}
 >
   <fieldset class='sign-up-form__form-fieldset' name='fieldset'>
     <h2 class='sign-up-form__title'>
@@ -10,6 +10,8 @@
         Junte-se a nós
       {{/if}}
     </h2>
+
+    {{{ bonusesMarkup }}}
 
     {{> auth-type-radio }}
 

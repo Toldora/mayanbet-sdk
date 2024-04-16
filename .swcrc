@@ -22,7 +22,8 @@
     "keepClassNames": true,
     "preserveAllComments": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "@static/*": ["./static/*"]
     }
   },
   "exclude": ["src/tests", ".test.js"],

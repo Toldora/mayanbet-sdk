@@ -1,8 +1,7 @@
-// import handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import queryString from 'query-string';
-// import template from '@/templates/sign-up-form.hbs?raw';
+import signUpFormTemplate from '@static/templates/sign-up-form.hbs?raw';
 import {
-  // openModal,
   setToLS,
   prepareInputMask,
   generateId,
@@ -11,8 +10,6 @@ import {
 import { registerUser, registerUserViaTelephone } from '@/api/registration';
 import { sendMessage, validatePhone } from '@/api/wavix';
 import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
-
-// const modalContentRef = document.querySelector('.js-app-modal-content');
 
 export class SignUpForm {
   formRef = null;
@@ -251,15 +248,6 @@ export class SignUpForm {
   }
 }
 
-// export const openSignUpModal = ({ isBlocked } = {}) => {
-//   const markup = handlebars.compile(template)();
-
-//   modalContentRef.innerHTML = '';
-//   modalContentRef.insertAdjacentHTML('beforeend', markup);
-
-//   new SignUpForm({
-//     formRef: document.forms.signUp,
-//   });
-
-//   openModal({ isBlocked });
-// };
+export const compileSignUpFormMarkup = (options = {}) => {
+  return handlebars.compile(signUpFormTemplate)(options);
+};
