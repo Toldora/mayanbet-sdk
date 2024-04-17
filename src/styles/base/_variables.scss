@@ -1,0 +1,50 @@
+@use 'sass:color';
+@import '@/styles/colors';
+
+:root,
+::before,
+::after {
+  --vh: 1vh;
+
+  // Primary colors
+  --col-total-white: #{$col-total-white};
+  --col-total-white-rgb: #{$col-total-white-rgb};
+  --col-total-black: #{$col-total-black};
+  --col-total-black-rgb: #{$col-total-black-rgb};
+
+  --col-dark-tone-ink: #{$col-dark-tone-ink};
+  --col-dark-tone-ink-rgb: #{$col-dark-tone-ink-rgb};
+  --col-tibetan-yellow: #{$col-tibetan-yellow};
+  --col-tibetan-yellow-rgb: #{$col-tibetan-yellow-rgb};
+  --col-nuclear-fallout: #{$col-nuclear-fallout};
+  --col-nuclear-fallout-rgb: #{$col-nuclear-fallout-rgb};
+  --col-gordons-green: #{$col-gordons-green};
+  --col-gordons-green-rgb: #{$col-gordons-green-rgb};
+  --col-kuro-green: #{$col-kuro-green};
+  --col-kuro-green-rgb: #{$col-kuro-green-rgb};
+  --col-rich-olive: #{$col-rich-olive};
+  --col-rich-olive-rgb: #{$col-rich-olive-rgb};
+  --col-vermilion-cinnabar: #{$col-vermilion-cinnabar};
+  --col-radiant-silver: #{$col-radiant-silver};
+  --col-bilberry: #{$col-bilberry};
+  --col-island-palm: #{$col-island-palm};
+
+  // Transitions
+  --fast-transition-duration: 0.2s;
+  --medium-transition-duration: 0.3s;
+  --slow-transition-duration: 0.4s;
+  --hover-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --slide-transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  --fade-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --hover-transition: var(--fast-transition-duration)
+    var(--hover-transition-timing-function);
+  --slide-transition: var(--medium-transition-duration)
+    var(--slide-transition-timing-function);
+
+  // Common
+  --scrollbar-color: var(--primary-text-color);
+
+  // Auth type radio
+  --auth-type-radio-bg-hover: rgba(#{$col-total-white-rgb}, 15%);
+  --auth-type-radio-bg-checked: rgba(#{$col-total-white-rgb}, 35%);
+}

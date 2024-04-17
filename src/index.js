@@ -1,4 +1,5 @@
 import '@/plugins';
+import '@/styles/index.scss';
 
 export * from '@/api';
 export * from '@/const';
