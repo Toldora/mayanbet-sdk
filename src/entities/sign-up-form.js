@@ -1,12 +1,7 @@
 import handlebars from 'handlebars';
 import queryString from 'query-string';
 import signUpFormTemplate from '@static/templates/sign-up-form.hbs?raw';
-import {
-  setToLS,
-  prepareInputMask,
-  generateId,
-  generatePassword,
-} from '@/utils';
+import { prepareInputMask, generateId, generatePassword } from '@/utils';
 import { registerUser, registerUserViaTelephone } from '@/api/registration';
 import { sendMessage, validatePhone } from '@/api/wavix';
 import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
@@ -17,9 +12,11 @@ export class SignUpForm {
   isTelAuthType = true;
   isVisiblePassword = false;
   isSubmitLoading = false;
+  submitCallback = null;
 
-  constructor({ formRef }) {
+  constructor({ formRef, submitCallback = null }) {
     this.formRef = formRef;
+    this.submitCallback = submitCallback;
 
     prepareInputMask(this.formRef);
 
@@ -182,7 +179,7 @@ export class SignUpForm {
         responseData = (await registerUser(body)).data;
       }
 
-      setToLS('isAlreadyRegistered', true);
+      await this.submitCallback?.();
 
       searchString.state = responseData?.autologinToken;
       const stringifiedSearch = queryString.stringify(searchString);
