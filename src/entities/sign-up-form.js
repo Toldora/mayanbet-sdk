@@ -185,7 +185,9 @@ export class SignUpForm {
       const stringifiedSearch = queryString.stringify(searchString);
 
       window.location.replace(
-        `${process.env.VITE_REDIRECT_URL}/auth/autologin/?${stringifiedSearch}`,
+        `${
+          import.meta.env.VITE_REDIRECT_URL
+        }/auth/autologin/?${stringifiedSearch}`,
       );
     } catch (error) {
       const errorMessages = [];
@@ -204,7 +206,7 @@ export class SignUpForm {
         const stringifiedSearch = queryString.stringify(searchString);
 
         window.location.replace(
-          `${process.env.VITE_REDIRECT_URL}/?${stringifiedSearch}`,
+          `${import.meta.env.VITE_REDIRECT_URL}/?${stringifiedSearch}`,
         );
         return;
       }

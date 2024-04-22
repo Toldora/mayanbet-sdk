@@ -1,7 +1,9 @@
 {
   "name": "mayanbet-sdk",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
+  "author": "MayanBet",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.es.js",
   "style": "./dist/style.css",
@@ -16,8 +18,9 @@
     "lint:scripts": "eslint \"{src,config}/**/*.js\" --cache --fix --max-warnings=0",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\" --max-warnings=0"
   },
-  "author": "MayanBet",
-  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "devDependencies": {
     "@comparaonline/stylelint-config-scss-modules": "^1.1.0",
     "autoprefixer": "^10.4.16",
