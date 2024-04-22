@@ -1,20 +1,10 @@
 {
   "name": "mayanbet-sdk",
-  "version": "1.1.0",
+  "version": "1.0.4",
   "description": "",
-  "author": "MayanBet",
-  "license": "MIT",
-  "main": "./dist/index.cjs.js",
-  "browser": "./dist/index.es.js",
-  "module": "./dist/index.es.js",
+  "type": "module",
+  "main": "./dist/index.es.js",
   "style": "./dist/style.css",
-  "exports": {
-    ".": {
-      "require": "./dist/index.cjs.js",
-      "import": "./dist/index.es.js",
-      "default": "./dist/index.es.js"
-    }
-  },
   "files": [
     "./dist"
   ],
@@ -24,8 +14,11 @@
     "preview": "vite preview",
     "lint": "yarn lint:scripts && yarn lint:styles",
     "lint:scripts": "eslint \"{src,config}/**/*.js\" --cache --fix --max-warnings=0",
-    "lint:styles": "stylelint \"src/**/*.{css,scss}\" --max-warnings=0"
+    "lint:styles": "stylelint \"src/**/*.{css,scss}\" --max-warnings=0",
+    "publish": "yarn build && npm publish"
   },
+  "author": "MayanBet",
+  "license": "MIT",
   "devDependencies": {
     "@comparaonline/stylelint-config-scss-modules": "^1.1.0",
     "autoprefixer": "^10.4.16",
