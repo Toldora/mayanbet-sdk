@@ -44,7 +44,17 @@
   // Common
   --scrollbar-color: var(--primary-text-color);
 
+  // Sign up form
+  --sign-up-form-input-bg: var(--col-gordons-green);
+  --sign-up-form-text-color: var(--col-total-white);
+  --sign-up-form-accent-text-color: var(--col-tibetan-yellow);
+
+  @include respond-above(small) {
+    --sign-up-form-input-bg: var(--col-rich-olive);
+  }
+
   // Auth type radio
+  --auth-type-radio-bg: var(--sign-up-form-input-bg);
   --auth-type-radio-bg-hover: rgba(#{$col-total-white-rgb}, 15%);
   --auth-type-radio-bg-checked: rgba(#{$col-total-white-rgb}, 35%);
 }

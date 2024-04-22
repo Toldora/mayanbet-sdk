@@ -1,6 +1,7 @@
 .sign-up-form__form {
   width: 100%;
   margin: 0 auto;
+  color: var(--sign-up-form-text-color);
 }
 
 .sign-up-form__form-fieldset {
@@ -21,7 +22,7 @@
 }
 
 .sign-up-form__accent-text {
-  color: var(--col-tibetan-yellow);
+  color: var(--sign-up-form-accent-text-color);
 }
 
 .sign-up-form__auth-inputs {
@@ -104,16 +105,12 @@
   margin-top: to-rem(8);
   padding: to-rem(10) calc(to-rem(16) + var(--hide-pass-btn-width, to-rem(0)))
     to-rem(10) to-rem(16);
-  background-color: var(--col-gordons-green);
+  background-color: var(--sign-up-form-input-bg);
   border: none;
   border-radius: to-rem(12);
   box-shadow: none;
   color: inherit;
   font-size: to-rem(14);
-
-  @include respond-above(small) {
-    background-color: var(--col-rich-olive);
-  }
 }
 
 .sign-up-form__auth-error {
