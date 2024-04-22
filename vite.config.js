@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
     build: {
       lib: {
         entry: path.resolve(__dirname, `${root}/index.js`),
-        formats: ['es'],
+        formats: ['cjs', 'es'],
         fileName: format => `index.${format}.js`,
       },
     },
