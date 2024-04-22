@@ -1,6 +1,6 @@
 {
   "name": "mayanbet-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "type": "module",
   "main": "./dist/index.es.js",
@@ -14,7 +14,8 @@
     "preview": "vite preview",
     "lint": "yarn lint:scripts && yarn lint:styles",
     "lint:scripts": "eslint \"{src,config}/**/*.js\" --cache --fix --max-warnings=0",
-    "lint:styles": "stylelint \"src/**/*.{css,scss}\" --max-warnings=0"
+    "lint:styles": "stylelint \"src/**/*.{css,scss}\" --max-warnings=0",
+    "publish": "yarn build && npm publish"
   },
   "author": "MayanBet",
   "license": "MIT",
