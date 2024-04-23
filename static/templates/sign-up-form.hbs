@@ -139,7 +139,11 @@
         <span>Carregando</span>
       </div>
       <div class='sign-up-form__submit-btn-content'>
-        Inscrever-se
+        {{#if submitText}}
+          {{title}}
+        {{else}}
+          Inscrever-se
+        {{/if}}
       </div>
     </button>
   </fieldset>
