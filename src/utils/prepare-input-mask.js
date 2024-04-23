@@ -1,4 +1,6 @@
 export const prepareInputMask = formRef => {
+  if (!formRef) return;
+
   for (const el of formRef.querySelectorAll('[placeholder][data-slots]')) {
     const pattern = el.getAttribute('placeholder'),
       slots = new Set(el.dataset.slots || '_'),
