@@ -201,6 +201,22 @@ export class SignUpForm {
         errorMessages.push([error.message]);
       }
 
+      if (
+        errorMessages.some(
+          message =>
+            message === ERROR_MESSAGES_EN.emailExist ||
+            message === ERROR_MESSAGES_EN.phoneExist,
+        )
+      ) {
+        searchString['wallet'] = 'deposit';
+        const stringifiedSearch = queryString.stringify(searchString);
+
+        window.location.replace(
+          `${import.meta.env.VITE_REDIRECT_URL}/?${stringifiedSearch}`,
+        );
+        return;
+      }
+
       if (!errorMessages.length) {
         searchString['sign-up'] = true;
         const stringifiedSearch = queryString.stringify(searchString);
