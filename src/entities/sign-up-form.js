@@ -203,7 +203,7 @@ export class SignUpForm {
 
       if (
         errorMessages.some(
-          message =>
+          ([message]) =>
             message === ERROR_MESSAGES_EN.emailExist ||
             message === ERROR_MESSAGES_EN.phoneExist,
         )
