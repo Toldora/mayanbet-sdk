@@ -5,7 +5,7 @@ import { prepareInputMask, generateId, generatePassword } from '@/utils';
 import { registerUser, registerUserViaTelephone } from '@/api/registration';
 import { sendMessage, validatePhone } from '@/api/wavix';
 import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
-import { validateEmail } from '..';
+// import { validateEmail } from '..';
 
 export class SignUpForm {
   formRef = null;
@@ -172,14 +172,14 @@ export class SignUpForm {
         await sendMessage(smsData);
       } else {
         const email = this.formRef[AUTH_FIELD.email].value;
-        // Code plus character for query param
-        const codedEmail = email.replace(/\+/g, '%2B');
+        // // Code plus character for query param
+        // const codedEmail = email.replace(/\+/g, '%2B');
 
-        const { isValid } = await validateEmail(codedEmail);
+        // const { isValid } = await validateEmail(codedEmail);
 
-        if (isValid !== 'Yes') {
-          throw new Error(ERROR_MESSAGES_PT.invalidEmail);
-        }
+        // if (isValid !== 'Yes') {
+        //   throw new Error(ERROR_MESSAGES_PT.invalidEmail);
+        // }
 
         const body = {
           ...defaultBody,
