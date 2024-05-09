@@ -171,11 +171,11 @@ export class SignUpForm {
 
         await sendMessage(smsData);
       } else {
-        const rawEmail = this.formRef[AUTH_FIELD.email].value;
+        const email = this.formRef[AUTH_FIELD.email].value;
         // Code plus character for query param
-        const email = rawEmail.replace(/\+/g, '%2B');
+        const codedEmail = email.replace(/\+/g, '%2B');
 
-        const { isValid } = await validateEmail(email);
+        const { isValid } = await validateEmail(codedEmail);
 
         if (isValid !== 'Yes') {
           throw new Error(ERROR_MESSAGES_PT.invalidEmail);
