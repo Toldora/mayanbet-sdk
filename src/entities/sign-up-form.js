@@ -177,7 +177,7 @@ export class SignUpForm {
 
         const { isValid } = await validateEmail(email);
 
-        if (isValid === 'No') {
+        if (isValid !== 'Yes') {
           throw new Error(ERROR_MESSAGES_PT.invalidEmail);
         }
 
