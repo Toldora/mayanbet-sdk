@@ -169,7 +169,8 @@ export class SignUpForm {
           },
         };
 
-        await sendMessage(smsData);
+        // Removed await for ignoring errors
+        sendMessage(smsData);
       } else {
         const email = this.formRef[AUTH_FIELD.email].value;
         // // Code plus character for query param
