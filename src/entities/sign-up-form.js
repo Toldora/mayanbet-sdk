@@ -161,7 +161,7 @@ export class SignUpForm {
         responseData = (await registerUserViaTelephone(body)).data;
 
         const smsData = {
-          from: '551151181700',
+          from: 'mayanbet',
           to: `+${phone}`,
           message_body: {
             text: `Sua nova senha no Mayan.bet é: ${password}`,
