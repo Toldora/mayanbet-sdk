@@ -1,6 +1,6 @@
 import { wavixApi } from './instance';
 
-const sendMessage = async messageFormData => {
+const sendMessageWavix = async messageFormData => {
   const response = await wavixApi.post(
     `/v2/messages?appid=${import.meta.env.VITE_WAVIX_API_KEY}`,
     messageFormData,
@@ -17,4 +17,4 @@ const validatePhone = async phone => {
   return response.data;
 };
 
-export { sendMessage, validatePhone };
+export { sendMessageWavix, validatePhone };

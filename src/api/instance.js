@@ -11,3 +11,7 @@ export const wavixApi = axios.create({
 export const mailscanApi = axios.create({
   baseURL: import.meta.env.VITE_MAILSCAN_API_URL,
 });
+
+export const mmdsmartApi = axios.create({
+  baseURL: import.meta.env.VITE_MMDSMART_API_URL,
+});

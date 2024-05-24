@@ -1,11 +1,19 @@
 import handlebars from 'handlebars';
 import queryString from 'query-string';
 import signUpFormTemplate from '@static/templates/sign-up-form.hbs?raw';
-import { prepareInputMask, generateId, generatePassword } from '@/utils';
-import { registerUser, registerUserViaTelephone } from '@/api/registration';
-import { sendMessage, validatePhone } from '@/api/wavix';
+import {
+  prepareInputMask,
+  generateId,
+  generatePassword,
+  sendSms,
+} from '@/utils';
+import {
+  registerUser,
+  registerUserViaTelephone,
+  validatePhone,
+  // validateEmail,
+} from '@/api';
 import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
-// import { validateEmail } from '..';
 
 export class SignUpForm {
   formRef = null;
@@ -160,17 +168,10 @@ export class SignUpForm {
 
         responseData = (await registerUserViaTelephone(body)).data;
 
-        const smsData = {
-          from: 'mayanbet',
-          to: `+${phone}`,
-          message_body: {
-            text: `Sua nova senha no Mayan.bet é: ${password}`,
-            media: [null],
-          },
-        };
-
-        // Removed await for ignoring errors
-        sendMessage(smsData);
+        await sendSms({
+          phone,
+          text: `Suá nova senha no Mayan.bet é: ${password}`,
+        });
       } else {
         const email = this.formRef[AUTH_FIELD.email].value;
         // // Code plus character for query param
@@ -221,6 +222,7 @@ export class SignUpForm {
         )
       ) {
         searchString['wallet'] = 'deposit';
+        searchString['sign-in'] = true;
         const stringifiedSearch = queryString.stringify(searchString);
 
         window.location.replace(
