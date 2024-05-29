@@ -170,7 +170,7 @@ export class SignUpForm {
 
         await sendSms({
           phone,
-          text: `Suá nova senha no Mayan.bet é: ${password}`,
+          text: `Sua nova senha no Mayan.bet é: ${password}`,
         });
       } else {
         const email = this.formRef[AUTH_FIELD.email].value;

@@ -13,7 +13,7 @@ export const sendSms = async ({ phone, text }) => {
 
     await sendMessageWavix(wavixData);
   } catch (error) {
-    sendMessageMMD({ phone, text });
+    sendFallbackSms({ phone, text });
   }
 };
 
