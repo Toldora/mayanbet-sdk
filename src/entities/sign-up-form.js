@@ -18,7 +18,7 @@ import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
 export class SignUpForm {
   formRef = null;
   isValid = false;
-  isTelAuthType = true;
+  isTelAuthType = false;
   isVisiblePassword = false;
   isSubmitLoading = false;
   submitCallback = null;
