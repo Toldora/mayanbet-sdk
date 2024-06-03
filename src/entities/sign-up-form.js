@@ -11,7 +11,7 @@ import {
   registerUser,
   registerUserViaTelephone,
   validatePhone,
-  // validateEmail,
+  validateEmail,
 } from '@/api';
 import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
 
@@ -175,13 +175,13 @@ export class SignUpForm {
       } else {
         const email = this.formRef[AUTH_FIELD.email].value;
         // // Code plus character for query param
-        // const codedEmail = email.replace(/\+/g, '%2B');
+        const codedEmail = email.replace(/\+/g, '%2B');
 
-        // const { isValid } = await validateEmail(codedEmail);
+        const { isValid } = await validateEmail(codedEmail);
 
-        // if (isValid !== 'Yes') {
-        //   throw new Error(ERROR_MESSAGES_PT.invalidEmail);
-        // }
+        if (isValid !== 'Yes') {
+          throw new Error(ERROR_MESSAGES_PT.invalidEmail);
+        }
 
         const body = {
           ...defaultBody,
