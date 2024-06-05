@@ -177,9 +177,9 @@ export class SignUpForm {
         // // Code plus character for query param
         const codedEmail = email.replace(/\+/g, '%2B');
 
-        const { isValid } = await validateEmail(codedEmail);
+        const { status } = await validateEmail(codedEmail);
 
-        if (isValid !== 'Yes') {
+        if (status !== 'valid') {
           throw new Error(ERROR_MESSAGES_PT.invalidEmail);
         }
 
