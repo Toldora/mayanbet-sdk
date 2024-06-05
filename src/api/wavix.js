@@ -8,7 +8,7 @@ const sendMessageWavix = async messageFormData => {
   return response.data;
 };
 
-const validatePhone = async phone => {
+const validatePhoneApi = async phone => {
   const response = await wavixApi.get(
     `/v1/validation?appid=${
       import.meta.env.VITE_WAVIX_API_KEY
@@ -17,4 +17,4 @@ const validatePhone = async phone => {
   return response.data;
 };
 
-export { sendMessageWavix, validatePhone };
+export { sendMessageWavix, validatePhoneApi };

@@ -6,13 +6,10 @@ import {
   generateId,
   generatePassword,
   sendSms,
-} from '@/utils';
-import {
-  registerUser,
-  registerUserViaTelephone,
-  validatePhone,
   validateEmail,
-} from '@/api';
+  validatePhone,
+} from '@/utils';
+import { registerUser, registerUserViaTelephone } from '@/api';
 import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
 
 export class SignUpForm {
@@ -149,14 +146,8 @@ export class SignUpForm {
       if (this.isTelAuthType) {
         const rawPhone = this.formRef[AUTH_FIELD.tel].value;
         const phone = `55${rawPhone}`;
-        // // Remove all characters except numbers
-        // const phone = rawPhone.replace(/[^\d]/g, '');
 
-        const { valid } = await validatePhone(phone);
-
-        if (!valid) {
-          throw new Error(ERROR_MESSAGES_PT.invalidPhone);
-        }
+        await validatePhone(phone);
 
         const password = generatePassword();
 
@@ -174,14 +165,8 @@ export class SignUpForm {
         });
       } else {
         const email = this.formRef[AUTH_FIELD.email].value;
-        // // Code plus character for query param
-        const codedEmail = email.replace(/\+/g, '%2B');
 
-        const { status } = await validateEmail(codedEmail);
-
-        if (status !== 'valid') {
-          throw new Error(ERROR_MESSAGES_PT.invalidEmail);
-        }
+        await validateEmail(email);
 
         const body = {
           ...defaultBody,
