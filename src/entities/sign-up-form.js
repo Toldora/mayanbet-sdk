@@ -23,6 +23,8 @@ export class SignUpForm {
   constructor({ formRef, submitCallback = null }) {
     this.formRef = formRef;
     this.submitCallback = submitCallback;
+    this.isTelAuthType =
+      this.formRef[AUTH_FIELD.authType]?.value === AUTH_FIELD.tel;
 
     prepareInputMask(this.formRef);
 
