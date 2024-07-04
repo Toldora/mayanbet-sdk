@@ -6,11 +6,16 @@ export const validateEmail = async email => {
     // // Code plus character for query param
     const codedEmail = email.replace(/\+/g, '%2B');
 
-    const { status, error } = await validateEmailApi(codedEmail);
+    const { status, sub_status, error } = await validateEmailApi(codedEmail);
 
     if (error) return;
 
-    if (!EMAIL_VALIDATION_VALID_STATUSES[status?.toLowerCase()]) {
+    const isValidStatus = Boolean(
+      EMAIL_VALIDATION_VALID_STATUSES[sub_status?.toLowerCase()] ||
+        EMAIL_VALIDATION_VALID_STATUSES[status?.toLowerCase()],
+    );
+
+    if (!isValidStatus) {
       throw new Error(ERROR_MESSAGES_PT.invalidEmail);
     }
   } catch (error) {
