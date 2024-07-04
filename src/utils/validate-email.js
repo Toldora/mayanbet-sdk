@@ -1,5 +1,5 @@
 import { validateEmailApi } from '@/api';
-import { ERROR_MESSAGES_PT } from '@/const';
+import { EMAIL_VALIDATION_VALID_STATUSES, ERROR_MESSAGES_PT } from '@/const';
 
 export const validateEmail = async email => {
   try {
@@ -10,7 +10,7 @@ export const validateEmail = async email => {
 
     if (error) return;
 
-    if (status !== 'valid') {
+    if (!EMAIL_VALIDATION_VALID_STATUSES[status?.toLowerCase()]) {
       throw new Error(ERROR_MESSAGES_PT.invalidEmail);
     }
   } catch (error) {
