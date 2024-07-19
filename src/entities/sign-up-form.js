@@ -1,6 +1,7 @@
 import handlebars from 'handlebars';
 import queryString from 'query-string';
-import signUpFormTemplate from '@static/templates/sign-up-form.hbs?raw';
+import signUpFormBrTemplate from '@static/templates/br/sign-up-form-br.hbs?raw';
+import signUpFormAzTemplate from '@static/templates/az/sign-up-form-az.hbs?raw';
 import {
   prepareInputMask,
   generateId,
@@ -10,7 +11,12 @@ import {
   validatePhone,
 } from '@/utils';
 import { registerUser, registerUserViaTelephone } from '@/api';
-import { AUTH_FIELD, ERROR_MESSAGES_EN, ERROR_MESSAGES_PT } from '@/const';
+import {
+  AUTH_FIELD,
+  LOCALE,
+  ERROR_MESSAGES_EN,
+  ERROR_MESSAGES_PT,
+} from '@/const';
 
 export class SignUpForm {
   formRef = null;
@@ -263,5 +269,16 @@ export class SignUpForm {
 }
 
 export const compileSignUpFormMarkup = (options = {}) => {
-  return handlebars.compile(signUpFormTemplate)(options);
+  const { locale = LOCALE.brazil } = options;
+
+  switch (locale) {
+    case LOCALE.brazil:
+      return handlebars.compile(signUpFormBrTemplate)(options);
+
+    case LOCALE.azerbaijan:
+      return handlebars.compile(signUpFormAzTemplate)(options);
+
+    default:
+      return handlebars.compile(signUpFormBrTemplate)(options);
+  }
 };

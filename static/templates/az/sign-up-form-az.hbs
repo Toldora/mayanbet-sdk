@@ -11,24 +11,23 @@
       {{#if title}}
         {{title}}
       {{else}}
-        Junte-se a nós
+        Bizə qoşul
       {{/if}}
     </h2>
 
     {{{ bonusesMarkup }}}
 
-    {{> auth-type-radio isEmailOnFirstPosition=isEmailOnFirstPosition }}
+    {{> auth-type-radio-az isEmailOnFirstPosition=isEmailOnFirstPosition }}
 
     {{#if isEmailOnFirstPosition}}
       <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
         <label class='sign-up-form__input-label'>
-          <div class='sign-up-form__text-input-label'>Digite seu endereço de
-            e-mail</div>
+          <div class='sign-up-form__text-input-label'>E-mail qeyd edin</div>
           <input
             class='sign-up-form__text-input'
             name='email'
             required
-            placeholder='seu.email.aqui@gmail.com'
+            placeholder='email.burada@gmail.com'
             type='email'
             autocomplete='email'
           />
@@ -37,20 +36,20 @@
       <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--tel'>
         <label class='sign-up-form__input-label'>
           <div class='sign-up-form__text-input-label'>
-            Digite seu número de telefone
+            Telefon nömrənizi qeyd edin
           </div>
           <div class='sign-up-form__tel-input-wrapper'>
             <div class='sign-up-form__input-stub'>
-              {{> svg-icon class='sign-up-form__country-img' width="24" height="20" name='brazil-flag' }}
+              {{> svg-icon class='sign-up-form__country-img' width="24" height="20" name='azerbaijan-flag' }}
 
-              <span>+55</span>
+              <span>+994</span>
             </div>
             <input
               class='sign-up-form__text-input'
               name='tel'
               type='tel'
               autocomplete='off'
-              placeholder='           '
+              placeholder='          '
               data-slots=' '
             />
           </div>
@@ -60,13 +59,13 @@
       <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--tel'>
         <label class='sign-up-form__input-label'>
           <div class='sign-up-form__text-input-label'>
-            Digite seu número de telefone
+            Telefon nömrənizi qeyd edin
           </div>
           <div class='sign-up-form__tel-input-wrapper'>
             <div class='sign-up-form__input-stub'>
-              {{> svg-icon class='sign-up-form__country-img' width="24" height="20" name='brazil-flag' }}
+              {{> svg-icon class='sign-up-form__country-img' width="24" height="20" name='azerbaijan-flag' }}
 
-              <span>+55</span>
+              <span>+994</span>
             </div>
             <input
               class='sign-up-form__text-input'
@@ -74,7 +73,7 @@
               type='tel'
               required
               autocomplete='off'
-              placeholder='           '
+              placeholder='          '
               data-slots=' '
             />
           </div>
@@ -82,12 +81,11 @@
       </div>
       <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
         <label class='sign-up-form__input-label'>
-          <div class='sign-up-form__text-input-label'>Digite seu endereço de
-            e-mail</div>
+          <div class='sign-up-form__text-input-label'>E-mail qeyd edin</div>
           <input
             class='sign-up-form__text-input'
             name='email'
-            placeholder='seu.email.aqui@gmail.com'
+            placeholder='email.burada@gmail.com'
             type='email'
             autocomplete='email'
           />
@@ -96,14 +94,14 @@
     {{/if}}
 
     <div class='sign-up-form__auth-error js-auth-error'></div>
-    <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
+    <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email sign-up-form__auth-inputs--tel'>
       <label class='sign-up-form__input-label'>
-        <div class='sign-up-form__text-input-label'>Crie uma senha</div>
+        <div class='sign-up-form__text-input-label'>Şifrə</div>
         <div class='sign-up-form__text-input-wrapper'>
           <input
             class='sign-up-form__text-input'
             name='password'
-            {{#if isEmailOnFirstPosition}}required{{/if}}
+            required
             placeholder='******'
             type='password'
             minlength='6'
@@ -112,7 +110,7 @@
           <button
             class='sign-up-form__password-input-btn sign-up-form__password-input-btn--pass-hidden js-password-input-btn'
             type='button'
-            aria-label='Clique aqui para mostrar/ocultar senha'
+            aria-label='Şifrəni göstərmək/gizlətmək üçün bura klikləyin'
           >
             {{> svg-icon
             class='sign-up-form__password-btn-icon sign-up-form__password-btn-icon--off'
@@ -132,16 +130,16 @@
     </div>
     <div class='sign-up-form__country-wrapper'>
       <div>
-        <span>País</span>
+        <span>Ölkə</span>
         <div class='sign-up-form__input-stub'>
-          {{> svg-icon class='sign-up-form__country-img' width="24" height="20" name='brazil-flag' }}
+          {{> svg-icon class='sign-up-form__country-img' width="24" height="20" name='azerbaijan-flag' }}
 
-          <span>Brasil</span>
+          <span>Azərbaycan</span>
         </div>
       </div>
       <div>
-        <span>Moeda</span>
-        <div class='sign-up-form__input-stub'>BRL</div>
+        <span>Valyuta</span>
+        <div class='sign-up-form__input-stub'>AZN</div>
       </div>
     </div>
     <label class='sign-up-form__agree-wrapper'>
@@ -154,11 +152,8 @@
       />
       <span class='sign-up-form__check-box'></span>
       <div>
-        Eu concordo com
-        <span class='sign-up-form__accent-text'> termos e condições </span>
-        e
-        <span class='sign-up-form__accent-text'> privacidade </span>
-        da conta
+        Qeydiyyat üçün saytın qaydaları və şərtləri ilə 
+        <span class='sign-up-form__accent-text'>razılaşmaq lazımdır</span>
       </div>
     </label>
     <div class='sign-up-form__divider'></div>
@@ -166,7 +161,7 @@
       class='app-button app-button--disabled sign-up-form__submit-btn js-submit-btn'
       name='submitBtn'
       type='submit'
-      aria-label='Inscrever-se'
+      aria-label='Abunə olun'
     >
       <div class='sign-up-form__submit-loader'>
         {{> svg-icon
@@ -181,13 +176,13 @@
           height='24'
           name='loader-part-2'
         }}
-        <span>Carregando</span>
+        <span>Yüklənir</span>
       </div>
       <div class='sign-up-form__submit-btn-content'>
         {{#if submitText}}
           {{submitText}}
         {{else}}
-          Inscrever-se
+          Abunə olun
         {{/if}}
       </div>
     </button>
