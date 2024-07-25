@@ -23,5 +23,5 @@ export const sendFallbackSms = async ({ phone, text }) => {
     },
   };
 
-  await sendMessageWavix(wavixData);
+  sendMessageWavix(wavixData);
 };
