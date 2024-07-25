@@ -2,26 +2,26 @@ import { sendMessageWavix, sendMessageMMD } from '@/api';
 
 export const sendSms = async ({ phone, text }) => {
   try {
-    const wavixData = {
-      from: 'mayanbet',
-      to: `+${phone}`,
-      message_body: {
-        text,
-        media: [null],
-      },
+    const mmdData = {
+      to: phone,
+      text,
     };
 
-    await sendMessageWavix(wavixData);
+    await sendMessageMMD(mmdData);
   } catch (error) {
     sendFallbackSms({ phone, text });
   }
 };
 
 export const sendFallbackSms = async ({ phone, text }) => {
-  const mmdData = {
-    to: phone,
-    text,
+  const wavixData = {
+    from: 'mayanbet',
+    to: `+${phone}`,
+    message_body: {
+      text,
+      media: [null],
+    },
   };
 
-  sendMessageMMD(mmdData);
+  await sendMessageWavix(wavixData);
 };
