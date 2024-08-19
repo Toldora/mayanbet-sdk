@@ -105,13 +105,13 @@ export class SignUpForm {
     } else {
       this.formRef.classList.remove('sign-up-form__form--auth-with-tel');
       this.formRef.classList.add('sign-up-form__form--auth-with-email');
-      this.formRef[AUTH_FIELD.tel].required = false;
       [
         this.formRef[AUTH_FIELD.email],
         this.formRef[AUTH_FIELD.password],
       ].forEach(ref => {
         ref.required = true;
       });
+      this.formRef[AUTH_FIELD.tel].required = false;
       this.formRef[AUTH_FIELD.tel].value = '';
     }
 
