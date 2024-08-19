@@ -73,7 +73,7 @@
               type='tel'
               required
               autocomplete='off'
-              placeholder='          '
+              placeholder='         '
               data-slots=' '
             />
           </div>
@@ -94,14 +94,14 @@
     {{/if}}
 
     <div class='sign-up-form__auth-error js-auth-error'></div>
-    <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email sign-up-form__auth-inputs--tel'>
+    <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
       <label class='sign-up-form__input-label'>
         <div class='sign-up-form__text-input-label'>Şifrə</div>
         <div class='sign-up-form__text-input-wrapper'>
           <input
             class='sign-up-form__text-input'
             name='password'
-            required
+            {{#if isEmailOnFirstPosition}}required{{/if}}
             placeholder='******'
             type='password'
             minlength='6'
