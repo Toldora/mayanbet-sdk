@@ -5,7 +5,6 @@ import signUpFormAzTemplate from '@static/templates/az/sign-up-form-az.hbs?raw';
 import {
   prepareInputMask,
   generateId,
-  generatePassword,
   sendSms,
   validateEmail,
   validatePhone,
@@ -64,21 +63,12 @@ export class SignUpForm {
     const { tel, email, password, submitBtn, agreeCheck } = this.formRef;
     if (!email || !password || !agreeCheck || !submitBtn) return;
 
-    let isValid = false;
-
-    if (this.isTelAuthType) {
-      const onlyNumbersRegex = new RegExp('\\d');
-      isValid =
-        onlyNumbersRegex.test(tel.value[tel.value.length - 1]) &&
+    this.isValid =
+        (this.isTelAuthType ? /\d/.test(tel.value[tel.value.length - 1]) : email.validity.valid) &&
+        password.validity.valid &&
         agreeCheck.checked;
-    } else {
-      isValid =
-        email.validity.valid && password.validity.valid && agreeCheck.checked;
-    }
-
-    this.isValid = isValid;
-
-    if (isValid) {
+    
+    if (this.isValid) {
       submitBtn.classList.remove('app-button--disabled');
     } else {
       submitBtn.classList.add('app-button--disabled');
@@ -94,14 +84,14 @@ export class SignUpForm {
       this.formRef.classList.remove('sign-up-form__form--auth-with-email');
       this.formRef.classList.add('sign-up-form__form--auth-with-tel');
 
-      this.formRef[AUTH_FIELD.tel].required = true;
       [
-        this.formRef[AUTH_FIELD.email],
+        this.formRef[AUTH_FIELD.tel],
         this.formRef[AUTH_FIELD.password],
       ].forEach(ref => {
-        ref.required = false;
-        ref.value = '';
+        ref.required = true;
       });
+      this.formRef[AUTH_FIELD.email].required = false;
+      this.formRef[AUTH_FIELD.email].value = '';
     } else {
       this.formRef.classList.remove('sign-up-form__form--auth-with-tel');
       this.formRef.classList.add('sign-up-form__form--auth-with-email');
@@ -157,12 +147,10 @@ export class SignUpForm {
 
         await validatePhone(phone);
 
-        const password = generatePassword();
-
         const body = {
           ...defaultBody,
           phone,
-          password,
+          password: this.formRef[AUTH_FIELD.password].value,
         };
 
         responseData = (await registerUserViaTelephone(body)).data;
