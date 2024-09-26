@@ -84,23 +84,16 @@ export class SignUpForm {
       this.formRef.classList.remove('sign-up-form__form--auth-with-email');
       this.formRef.classList.add('sign-up-form__form--auth-with-tel');
 
-      [
-        this.formRef[AUTH_FIELD.tel],
-        this.formRef[AUTH_FIELD.password],
-      ].forEach(ref => {
-        ref.required = true;
-      });
+      this.formRef[AUTH_FIELD.tel].required = true;
+      
       this.formRef[AUTH_FIELD.email].required = false;
       this.formRef[AUTH_FIELD.email].value = '';
     } else {
       this.formRef.classList.remove('sign-up-form__form--auth-with-tel');
       this.formRef.classList.add('sign-up-form__form--auth-with-email');
-      [
-        this.formRef[AUTH_FIELD.email],
-        this.formRef[AUTH_FIELD.password],
-      ].forEach(ref => {
-        ref.required = true;
-      });
+      
+      this.formRef[AUTH_FIELD.email].required = true;
+      
       this.formRef[AUTH_FIELD.tel].required = false;
       this.formRef[AUTH_FIELD.tel].value = '';
     }
@@ -137,6 +130,7 @@ export class SignUpForm {
         country: 'BR',
         affiliateTag: searchString.click_id ?? '',
         bonusCode: searchString.bonus_code ?? '',
+        password: this.formRef[AUTH_FIELD.password].value,
       };
 
       let responseData = null;
@@ -150,7 +144,6 @@ export class SignUpForm {
         const body = {
           ...defaultBody,
           phone,
-          password: this.formRef[AUTH_FIELD.password].value,
         };
 
         responseData = (await registerUserViaTelephone(body)).data;
@@ -167,7 +160,6 @@ export class SignUpForm {
         const body = {
           ...defaultBody,
           email,
-          password: this.formRef[AUTH_FIELD.password].value,
         };
 
         responseData = (await registerUser(body)).data;
