@@ -5,7 +5,7 @@ import signUpFormAzTemplate from '@static/templates/az/sign-up-form-az.hbs?raw';
 import {
   prepareInputMask,
   generateId,
-  sendSms,
+  // sendSms,
   validateEmail,
   validatePhone,
 } from '@/utils';
@@ -148,10 +148,10 @@ export class SignUpForm {
 
         responseData = (await registerUserViaTelephone(body)).data;
 
-        await sendSms({
-          phone,
-          text: `Sua nova senha no Mayan.bet é: ${password}`,
-        });
+        // await sendSms({
+        //   phone,
+        //   text: `Sua nova senha no Mayan.bet é: ${password}`,
+        // });
       } else {
         const email = this.formRef[AUTH_FIELD.email].value;
 
