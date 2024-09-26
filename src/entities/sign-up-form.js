@@ -25,7 +25,7 @@ export class SignUpForm {
   isSubmitLoading = false;
   submitCallback = null;
 
-  constructor({ formRef, submitCallback = null }) {
+  constructor({ formRef, submitCallback = null, redirectParams }) {
     this.formRef = formRef;
     this.submitCallback = submitCallback;
     this.isTelAuthType =
@@ -49,7 +49,9 @@ export class SignUpForm {
       'change',
       this.onChangeCheckbox.bind(this),
     );
-    this.formRef.addEventListener('submit', e => this.onSubmit.bind(this)(e));
+    this.formRef.addEventListener('submit', e =>
+      this.onSubmit.bind(this)(e, redirectParams),
+    );
 
     const hidePasswordBtnRefs = this.formRef.querySelectorAll(
       '.js-password-input-btn',
@@ -64,10 +66,12 @@ export class SignUpForm {
     if (!email || !password || !agreeCheck || !submitBtn) return;
 
     this.isValid =
-        (this.isTelAuthType ? /\d/.test(tel.value[tel.value.length - 1]) : email.validity.valid) &&
-        password.validity.valid &&
-        agreeCheck.checked;
-    
+      (this.isTelAuthType
+        ? /\d/.test(tel.value[tel.value.length - 1])
+        : email.validity.valid) &&
+      password.validity.valid &&
+      agreeCheck.checked;
+
     if (this.isValid) {
       submitBtn.classList.remove('app-button--disabled');
     } else {
@@ -85,15 +89,15 @@ export class SignUpForm {
       this.formRef.classList.add('sign-up-form__form--auth-with-tel');
 
       this.formRef[AUTH_FIELD.tel].required = true;
-      
+
       this.formRef[AUTH_FIELD.email].required = false;
       this.formRef[AUTH_FIELD.email].value = '';
     } else {
       this.formRef.classList.remove('sign-up-form__form--auth-with-tel');
       this.formRef.classList.add('sign-up-form__form--auth-with-email');
-      
+
       this.formRef[AUTH_FIELD.email].required = true;
-      
+
       this.formRef[AUTH_FIELD.tel].required = false;
       this.formRef[AUTH_FIELD.tel].value = '';
     }
@@ -112,7 +116,7 @@ export class SignUpForm {
     this.validate();
   };
 
-  onSubmit = async event => {
+  onSubmit = async (event, redirectParams = {}) => {
     event.preventDefault();
 
     const searchString = queryString.parse(window.location.search);
@@ -167,6 +171,9 @@ export class SignUpForm {
 
       await this.submitCallback?.();
 
+      Object.entries(redirectParams).forEach(([key, value]) => {
+        searchString[key] = value;
+      });
       searchString.state = responseData?.autologinToken;
       const stringifiedSearch = queryString.stringify(searchString);
 
