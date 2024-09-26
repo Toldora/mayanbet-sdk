@@ -33,7 +33,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'no-var': 'error',
     'comma-dangle': [1, 'always-multiline'],
-    'linebreak-style': ['error', 'unix'],
+    'linebreak-style': ['error', 'unix', 'windows'],
     'max-len': [
       1,
       {

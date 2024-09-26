@@ -5,8 +5,7 @@ import signUpFormAzTemplate from '@static/templates/az/sign-up-form-az.hbs?raw';
 import {
   prepareInputMask,
   generateId,
-  generatePassword,
-  sendSms,
+  // sendSms,
   validateEmail,
   validatePhone,
 } from '@/utils';
@@ -26,7 +25,7 @@ export class SignUpForm {
   isSubmitLoading = false;
   submitCallback = null;
 
-  constructor({ formRef, submitCallback = null }) {
+  constructor({ formRef, submitCallback = null, redirectParams }) {
     this.formRef = formRef;
     this.submitCallback = submitCallback;
     this.isTelAuthType =
@@ -50,7 +49,9 @@ export class SignUpForm {
       'change',
       this.onChangeCheckbox.bind(this),
     );
-    this.formRef.addEventListener('submit', e => this.onSubmit.bind(this)(e));
+    this.formRef.addEventListener('submit', e =>
+      this.onSubmit.bind(this)(e, redirectParams),
+    );
 
     const hidePasswordBtnRefs = this.formRef.querySelectorAll(
       '.js-password-input-btn',
@@ -64,21 +65,14 @@ export class SignUpForm {
     const { tel, email, password, submitBtn, agreeCheck } = this.formRef;
     if (!email || !password || !agreeCheck || !submitBtn) return;
 
-    let isValid = false;
+    this.isValid =
+      (this.isTelAuthType
+        ? /\d/.test(tel.value[tel.value.length - 1])
+        : email.validity.valid) &&
+      password.validity.valid &&
+      agreeCheck.checked;
 
-    if (this.isTelAuthType) {
-      const onlyNumbersRegex = new RegExp('\\d');
-      isValid =
-        onlyNumbersRegex.test(tel.value[tel.value.length - 1]) &&
-        agreeCheck.checked;
-    } else {
-      isValid =
-        email.validity.valid && password.validity.valid && agreeCheck.checked;
-    }
-
-    this.isValid = isValid;
-
-    if (isValid) {
+    if (this.isValid) {
       submitBtn.classList.remove('app-button--disabled');
     } else {
       submitBtn.classList.add('app-button--disabled');
@@ -95,22 +89,15 @@ export class SignUpForm {
       this.formRef.classList.add('sign-up-form__form--auth-with-tel');
 
       this.formRef[AUTH_FIELD.tel].required = true;
-      [
-        this.formRef[AUTH_FIELD.email],
-        this.formRef[AUTH_FIELD.password],
-      ].forEach(ref => {
-        ref.required = false;
-        ref.value = '';
-      });
+
+      this.formRef[AUTH_FIELD.email].required = false;
+      this.formRef[AUTH_FIELD.email].value = '';
     } else {
       this.formRef.classList.remove('sign-up-form__form--auth-with-tel');
       this.formRef.classList.add('sign-up-form__form--auth-with-email');
-      [
-        this.formRef[AUTH_FIELD.email],
-        this.formRef[AUTH_FIELD.password],
-      ].forEach(ref => {
-        ref.required = true;
-      });
+
+      this.formRef[AUTH_FIELD.email].required = true;
+
       this.formRef[AUTH_FIELD.tel].required = false;
       this.formRef[AUTH_FIELD.tel].value = '';
     }
@@ -129,7 +116,7 @@ export class SignUpForm {
     this.validate();
   };
 
-  onSubmit = async event => {
+  onSubmit = async (event, redirectParams = {}) => {
     event.preventDefault();
 
     const searchString = queryString.parse(window.location.search);
@@ -147,6 +134,7 @@ export class SignUpForm {
         country: 'BR',
         affiliateTag: searchString.click_id ?? '',
         bonusCode: searchString.bonus_code ?? '',
+        password: this.formRef[AUTH_FIELD.password].value,
       };
 
       let responseData = null;
@@ -157,20 +145,17 @@ export class SignUpForm {
 
         await validatePhone(phone);
 
-        const password = generatePassword();
-
         const body = {
           ...defaultBody,
           phone,
-          password,
         };
 
         responseData = (await registerUserViaTelephone(body)).data;
 
-        await sendSms({
-          phone,
-          text: `Sua nova senha no Mayan.bet é: ${password}`,
-        });
+        // await sendSms({
+        //   phone,
+        //   text: `Sua nova senha no Mayan.bet é: ${password}`,
+        // });
       } else {
         const email = this.formRef[AUTH_FIELD.email].value;
 
@@ -179,7 +164,6 @@ export class SignUpForm {
         const body = {
           ...defaultBody,
           email,
-          password: this.formRef[AUTH_FIELD.password].value,
         };
 
         responseData = (await registerUser(body)).data;
@@ -187,6 +171,9 @@ export class SignUpForm {
 
       await this.submitCallback?.();
 
+      Object.entries(redirectParams).forEach(([key, value]) => {
+        searchString[key] = value;
+      });
       searchString.state = responseData?.autologinToken;
       const stringifiedSearch = queryString.stringify(searchString);
 

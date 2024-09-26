@@ -96,14 +96,14 @@
     {{/if}}
 
     <div class='sign-up-form__auth-error js-auth-error'></div>
-    <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email'>
+    <div class='sign-up-form__auth-inputs sign-up-form__auth-inputs--email sign-up-form__auth-inputs--tel'>
       <label class='sign-up-form__input-label'>
         <div class='sign-up-form__text-input-label'>Crie uma senha</div>
         <div class='sign-up-form__text-input-wrapper'>
           <input
             class='sign-up-form__text-input'
             name='password'
-            {{#if isEmailOnFirstPosition}}required{{/if}}
+            required
             placeholder='******'
             type='password'
             minlength='6'
