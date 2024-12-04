@@ -1,7 +1,7 @@
 import handlebars from 'handlebars';
 import queryString from 'query-string';
 import signUpFormBrTemplate from '@static/templates/br/sign-up-form-br.hbs?raw';
-import prizeModalBrTemplate from '@static/templates/br/prize-modal-br.html?raw';
+// import prizeModalBrTemplate from '@static/templates/br/prize-modal-br.html?raw';
 import signUpFormAzTemplate from '@static/templates/az/sign-up-form-az.hbs?raw';
 import {
   prepareInputMask,
@@ -261,14 +261,14 @@ export const compileSignUpFormMarkup = (options = {}) => {
 
   switch (locale) {
     case LOCALE.brazil:
-      return handlebars.compile(prizeModalBrTemplate)();
-    // return handlebars.compile(signUpFormBrTemplate)(options);
+      // return handlebars.compile(prizeModalBrTemplate)();
+      return handlebars.compile(signUpFormBrTemplate)(options);
 
     case LOCALE.azerbaijan:
       return handlebars.compile(signUpFormAzTemplate)(options);
 
     default:
-      return handlebars.compile(prizeModalBrTemplate)();
-    // return handlebars.compile(signUpFormBrTemplate)(options);
+      // return handlebars.compile(prizeModalBrTemplate)();
+      return handlebars.compile(signUpFormBrTemplate)(options);
   }
 };
