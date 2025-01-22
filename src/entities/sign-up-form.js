@@ -10,7 +10,7 @@ import {
   validateEmail,
   validatePhone,
 } from '@/utils';
-import { registerUser, registerUserViaTelephone } from '@/api';
+import { loginUser, registerUser, registerUserViaTelephone } from '@/api';
 import {
   AUTH_FIELD,
   LOCALE,
@@ -202,14 +202,28 @@ export class SignUpForm {
             message === ERROR_MESSAGES_EN.phoneExist,
         )
       ) {
-        searchString['wallet'] = 'deposit';
-        searchString['sign-in'] = true;
-        const stringifiedSearch = queryString.stringify(searchString);
+        const rawPhone = this.formRef[AUTH_FIELD.tel].value;
+        const phone = `994${rawPhone}`;
+        const login = this.isTelAuthType
+          ? phone
+          : this.formRef[AUTH_FIELD.email].value;
+        const password = this.formRef[AUTH_FIELD.password].value;
+        await loginUser({
+          login,
+          password,
+        })
+          .then(() => {
+            searchString['p'] = 'mb' + window.btoa(password);
+            searchString['l'] = 'ca' + window.btoa(login);
+            const stringifiedSearch = queryString.stringify(searchString);
 
-        window.location.replace(
-          `${import.meta.env.VITE_REDIRECT_URL}/?${stringifiedSearch}`,
-        );
-        return;
+            window.location.replace(
+              `${
+                import.meta.env.VITE_REDIRECT_URL
+              }/auth/with-credentials/?${stringifiedSearch}`,
+            );
+          })
+          .catch(() => {});
       }
 
       if (!errorMessages.length) {
