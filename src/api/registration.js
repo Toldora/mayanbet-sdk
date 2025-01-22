@@ -23,6 +23,12 @@ const registerUserViaTelephone = async registrationFormData => {
   return response.data;
 };
 
+const loginUser = async loginFormData => {
+  const response = await turboApi.post('/api/player/sessions', loginFormData);
+
+  return response.data;
+};
+
 const getUserGeo = async () => {
   const response = await turboApi.get('/api/player/init');
   return response.data;
@@ -47,6 +53,7 @@ export {
   getRegistrationFields,
   registerUser,
   registerUserViaTelephone,
+  loginUser,
   getUserGeo,
   getCountries,
   getCurrencies,
